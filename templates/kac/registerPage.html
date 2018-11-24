@@ -1,1 +1,8 @@
-<h1>Sign up</h1>
+<h1>Register</h1>
+  <div id="login">
+        <form class="form-horizontal"  action="" method="post">
+        {% csrf_token %}
+            {{ form }}
+            <button type="submit">SIGN UP!</button>
+        </form>
+    </div>

@@ -1,8 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-class User(models.Model):
-    user_id = models.IntegerField(primary_key=True)
-    email_id = models.CharField(max_length=200, null=True, blank=False)
-    username = models.CharField(max_length=200, blank=True)
-    password = models.CharField(max_length=200, null=True, blank=False)
+class UpdatedUser(AbstractUser):
+    my_key = models.CharField(max_length=100, default='abcd')

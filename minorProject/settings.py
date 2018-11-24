@@ -26,6 +26,7 @@ SECRET_KEY = '9-j*#)q5hp)fta!ow%nsxh(bhpgak(ea3cut&9@a6x)gbmadun'
 DEBUG = True
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'kac.UpdatedUser'
 
 # Application definition
 
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -119,6 +120,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'login'

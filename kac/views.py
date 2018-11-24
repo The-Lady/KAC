@@ -8,23 +8,23 @@ from django.contrib.auth import (
 
 )
 from . forms import UserLogInForm, UserRegisterForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@login_required(login_url='/kac/login')
+def index(request):
+    return render(request, 'index.html')
+
+
 def login_view(request):
-    # print(request.user.is_authenticated())
-    # next = request.GET.get('next')
     form = UserLogInForm(request.POST or None)
     if form.is_valid():
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        if next:
-            return redirect(next)
-        # redirect
-        return render(request, 'index.html')
+        return redirect('kac:index')
         # print(request.user.is_authenticated())
     return render(request, 'kac/loginPage.html', {'form': form})
 
@@ -39,12 +39,11 @@ def register_view(request):
 
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("home:index")
-        # return
+        return redirect("kac:index")
 
     return render(request, 'kac/registerPage.html', {'form': form})
 
 
 def logout_view(request):
     logout(request)
-    return redirect("home:index")
+    return redirect("kac:index")
