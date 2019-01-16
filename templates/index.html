@@ -3,11 +3,42 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if request.user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'kac:logout' %}">logout</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'kac:login' %}">login</a>
-{% endif %}
+    {% if request.user.is_authenticated %}
+        {%  load static %}
+        <div>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+            <div class="container"><a class="navbar-brand" href="#" style="color: rgb(23,162,184);">KAC</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div
+                    class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Upload</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Download</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Share</a></li>
+                    </ul>
+                    <form class="form-inline mr-auto" target="_self">
+                        <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" name="search" id="search-field" /></div>
+                    </form><a class="btn btn-light action-button" role="button" href="{% url 'kac:logout' %}">Log Out</a></div>
+            </div>
+        </nav>
+        </div>
+        <div class="photo-gallery">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center"></h2>
+                <p class="text-center"></p>
+            </div>
+            <div class="row photos">
+                <div class="col-sm-6 col-md-4 col-lg-3 item" style="margin: 0;"><a href="/img/desk.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/desk.jpg' %}" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/building.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/building.jpg' %}" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/loft.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/loft.jpg' %}" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/building.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/building.jpg' %}" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/loft.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/loft.jpg' %}" /></a></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/desk.jpg" data-lightbox="photos"><img class="img-fluid" src="{% static 'img/desk.jpg' %}" /></a></div>
+            </div>
+        </div>
+        </div>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'kac:login' %}">login</a>
+        {% endif %}
 {% endblock %}

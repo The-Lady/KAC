@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class UserLogInForm(forms.Form):
-    username = forms.CharField(label="Enter username", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     # THIS METHOD IS ALWAYS CALLED WHEN CLEANED_DATA IS CALLED IN VIEWS.PY
@@ -31,11 +31,8 @@ class UserLogInForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-
-    email = forms.EmailField(label='Email Address',widget = forms.TextInput(attrs={'class': 'form-control'}))
-    email2 = forms.EmailField(label='Confirm Email',widget = forms.TextInput(attrs={'class': 'form-control'}))
-
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email Address', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
@@ -44,7 +41,6 @@ class UserRegisterForm(forms.ModelForm):
         fields = [
             'username',
             'email',
-            'email2',
             'password',
             'password2'
 
@@ -53,15 +49,12 @@ class UserRegisterForm(forms.ModelForm):
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('username')
         email = self.cleaned_data.get('email')
-        email2 = self.cleaned_data.get('email2')
         password = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('password2')
 
         if password != password2:
             raise forms.ValidationError("Passwords Don't Match")
 
-        if email != email2:
-            raise forms.ValidationError("Emails Don't Match")
         email_qs = User.objects.filter(email=email)
         if email_qs.exists():
             raise forms.ValidationError("This Email has already been registered")

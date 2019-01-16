@@ -1,8 +1,26 @@
-<h1>Register</h1>
-  <div id="login">
-        <form class="form-horizontal"  action="" method="post">
-        {% csrf_token %}
-            {{ form }}
-            <button type="submit">SIGN UP!</button>
-        </form>
+{% extends 'base.html' %}
+{% block content %}
+     <div>
+        <h1 class="text-center text-info">KAC</h1>
     </div>
+    <div class="register-photo" id="register">
+        <div class="form-container" id="login">
+            <form class="form-horizontal"  action="" method="post">
+                    <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                {% csrf_token %}
+                    {{ form }}
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign Up</button></div><a href="index.html" class="already">Already have an account? Login here.</a>
+            </form>
+        </div>
+    </div>
+
+{#<h1>Register</h1>#}
+{#  <div id="login">#}
+{#        <form class="form-horizontal"  action="" method="post">#}
+{#        {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <button type="submit">SIGN UP!</button>#}
+{#        </form>#}
+{#    </div>#}
+{##}
+{% endblock %}
